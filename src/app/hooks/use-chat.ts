@@ -77,5 +77,10 @@ export const useChat = () => {
     }
   }
 
-  return { listRef, form, onSubmit, messageList, isLoading }
+  const clearChat = () => {
+    setMessageList([])
+    setIsLoading(false)
+  }
+
+  return { listRef, form, onSubmit, messageList, isLoading, clearChat }
 }
