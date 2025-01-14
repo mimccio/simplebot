@@ -65,12 +65,15 @@ export const useChat = () => {
     try {
       if (isLoading || !message.length) return
 
-      setMessageList((prevList) => [...prevList, { text: message }])
+      setMessageList((prevList) => [...prevList, { text: message, datetime: new Date() }])
       form.reset({ message: '' })
       setIsLoading(true)
       const response = await getBotResponse(message.trim().toLowerCase())
       setIsLoading(false)
-      setMessageList((prevList) => [...prevList, { text: response.text, isBot: true }])
+      setMessageList((prevList) => [
+        ...prevList,
+        { text: response.text, isBot: true, datetime: new Date() },
+      ])
     } catch (error) {
       // TODO: handle error with toast
       console.log(error)
