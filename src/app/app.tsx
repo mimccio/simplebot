@@ -1,9 +1,10 @@
-import { Button } from "@/common/ui/button"
+import { Button } from '@/common/ui/button'
 import './app.css'
 
-
-export const App =() => {
+export const App = () => {
   return (
-    <div><Button>hello</Button></div>
+    <div className="flex bg-indigo-200 p-4">
+      <Button>hello</Button>
+    </div>
   )
 }
