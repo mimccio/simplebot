@@ -15,6 +15,9 @@ export const MessageList = ({ listRef, messageList, isLoading }: Props) => {
   return (
     <ScrollArea className="xs:px-4 xs:h-[calc(100svh-176px)] h-[calc(100svh-220px)] border-y border-indigo-200 bg-white px-2 sm:mx-4 sm:rounded-md sm:border sm:px-4">
       <ul ref={listRef} className="flex flex-col gap-2">
+        <span className="py-2 text-center text-xs font-semibold opacity-20">
+          - Début de la conversation-
+        </span>
         {messageList.map((msg, i) => (
           <li className={`flex ${msg.isBot ? '' : 'justify-end'}`} key={i}>
             <span
@@ -34,6 +37,7 @@ export const MessageList = ({ listRef, messageList, isLoading }: Props) => {
           data-testid="loader"
           className="mb-6 mt-3"
         />
+        <span className="h-8" />
       </ul>
     </ScrollArea>
   )
