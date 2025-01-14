@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 
 import { Button } from '@/common/ui/button'
 import { Form, FormField, FormItem, FormControl } from '@/common/ui/form'
@@ -6,16 +7,23 @@ import { Input } from '@/common/ui/input'
 import './app.css'
 
 export const App = () => {
+  const [messageList, setMessageList] = useState<string[]>([])
+
   const form = useForm({
     defaultValues: { message: '' },
   })
 
-  const onSubmit = () => {
-    console.log('submit')
+  const onSubmit = ({ message }: { message: string }) => {
+    setMessageList((prevList) => [...prevList, message])
   }
 
   return (
-    <div className="flex bg-indigo-200 p-4">
+    <div className="flex flex-col bg-indigo-200 p-4">
+      <ul>
+        {messageList.map((msg, i) => (
+          <li key={i}>{msg}</li>
+        ))}
+      </ul>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
