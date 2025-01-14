@@ -4,7 +4,7 @@ interface Props {
 
 export const MessageList = ({ messageList }: Props) => {
   return (
-    <ul>
+    <ul className="grow">
       {messageList.map((msg, i) => (
         <li key={i}>{msg}</li>
       ))}

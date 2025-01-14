@@ -12,7 +12,7 @@ interface Props {
 export const ChatForm = ({ form, onSubmit }: Props) => {
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="mb-8" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="message"
