@@ -46,6 +46,8 @@ export const useChat = () => {
     defaultValues: {
       message: '',
     },
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
   })
 
   useEffect(() => {
