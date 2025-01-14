@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -53,6 +53,11 @@ export const useChat = () => {
       autoAnimate(listRef.current)
     }
   }, [listRef])
+
+  useLayoutEffect(() => {
+    if (!listRef.current?.lastElementChild) return
+    listRef.current.lastElementChild.scrollIntoView({ behavior: 'smooth' })
+  }, [messageList])
 
   const onSubmit = async ({ message }: { message: string }) => {
     try {
