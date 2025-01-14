@@ -4,16 +4,8 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import autoAnimate from '@formkit/auto-animate'
 
-import { Message } from '../types/message'
-
-const botResponses = [
-  { id: 1, text: 'Bonjour comment puis-je vous aider ?', keyWords: ['bonjour', 'salut', 'hello'] },
-  {
-    id: 2,
-    text: 'Le temps à Lyon est pluvieux et il fait 12°C',
-    keyWords: ['météo', 'temps', 'température', 'lyon'],
-  },
-]
+import type { Message } from '../types/message'
+import { botResponses } from '../data/bot-responses'
 
 const getBotResponse = async (msg: string) => {
   let botResponse = null
