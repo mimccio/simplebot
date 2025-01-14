@@ -1,12 +1,17 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import autoAnimate from '@formkit/auto-animate'
 
-import { Message } from '../types/message';
+import { Message } from '../types/message'
 
 const botResponses = [
   { id: 1, text: 'Bonjour comment puis-je vous aider ?', keyWords: ['bonjour', 'salut', 'hello'] },
-  { id: 2, text: 'Le temps à Lyon est pluvieux et il fait 12°C', keyWords: ['météo', 'temps', 'température', 'lyon'] },
-];
+  {
+    id: 2,
+    text: 'Le temps à Lyon est pluvieux et il fait 12°C',
+    keyWords: ['météo', 'temps', 'température', 'lyon'],
+  },
+]
 
 const getBotResponse = async (msg: string) => {
   let botResponse = null
@@ -24,12 +29,16 @@ const getBotResponse = async (msg: string) => {
 }
 
 export const useChat = () => {
+  const listRef = useRef<HTMLUListElement>(null)
   const [messageList, setMessageList] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const form = useForm({ defaultValues: { message: '' } })
 
-  const form = useForm({
-    defaultValues: { message: '' },
-  })
+  useEffect(() => {
+    if (listRef.current) {
+      autoAnimate(listRef.current)
+    }
+  }, [listRef])
 
   const onSubmit = async ({ message }: { message: string }) => {
     try {
@@ -40,13 +49,12 @@ export const useChat = () => {
       setIsLoading(true)
       const response = await getBotResponse(message.trim().toLowerCase())
       setIsLoading(false)
-      setMessageList((prevList) => [...prevList, { text: response.text, isBot: true, }])
+      setMessageList((prevList) => [...prevList, { text: response.text, isBot: true }])
     } catch (error) {
       // TODO: handle error with toast
       console.log(error)
-
     }
   }
 
-  return { form, onSubmit, messageList, isLoading }
+  return { listRef, form, onSubmit, messageList, isLoading }
 }

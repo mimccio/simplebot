@@ -1,17 +1,19 @@
+import type { RefObject } from 'react'
 import SyncLoader from 'react-spinners/SyncLoader'
 
 import { ScrollArea } from '@/common/ui/scroll-area'
 import { Message } from '../types/message'
 
 interface Props {
+  listRef: RefObject<HTMLUListElement>
   messageList: Message[]
   isLoading: boolean
 }
 
-export const MessageList = ({ messageList, isLoading }: Props) => {
+export const MessageList = ({ listRef, messageList, isLoading }: Props) => {
   return (
     <ScrollArea className="xs:px-4 h-[calc(100svh-190px)] border-y border-indigo-200 bg-white px-2 sm:mx-4 sm:rounded-md sm:border sm:px-4">
-      <ul className="flex flex-col gap-2">
+      <ul ref={listRef} className="flex flex-col gap-2">
         {messageList.map((msg, i) => (
           <li className={`flex ${msg.isBot ? '' : 'justify-end'}`} key={i}>
             <span
@@ -28,7 +30,7 @@ export const MessageList = ({ messageList, isLoading }: Props) => {
           size={8}
           aria-label="Loading Spinner"
           data-testid="loader"
-          className="mb-8"
+          className="mb-6 mt-3"
         />
       </ul>
     </ScrollArea>
