@@ -1,5 +1,9 @@
+import { Button } from "@/common/ui/button"
+import './app.css'
+
+
 export const App =() => {
   return (
-    <div>app</div>
+    <div><Button>hello</Button></div>
   )
 }
