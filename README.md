@@ -4,8 +4,17 @@
 
 ## Exécuter l'application localement
 
+- Créer un fichier `.env` à la racine du projet et ajouter `VITE_OPENAI_API_KEY`
+
+- Installer les dépendances
+
 ```bash
 pnpm install
+```
+
+- Lancer le projet en local
+
+```bash
 pnpm dev
 ```
 
