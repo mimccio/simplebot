@@ -5,22 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import autoAnimate from '@formkit/auto-animate'
 
 import type { Message } from '../types/message'
-import { botResponses } from '../data/bot-responses'
-
-const getBotResponse = async (msg: string) => {
-  let botResponse = null
-  for (let i = 0; i < botResponses.length; i++) {
-    if (botResponses[i].keyWords.some((kw) => msg.includes(kw))) {
-      botResponse = botResponses[i]
-      break
-    }
-  }
-  // Fake delay
-  await new Promise((resolve) => setTimeout(resolve, 2000))
-
-  if (botResponse) return botResponse
-  return botResponses[Math.floor(Math.random() * botResponses.length)]
-}
+import { getOpenaiMessage } from '../utils/get-openai-message'
 
 const formSchema = z.object({
   message: z
@@ -60,12 +45,9 @@ export const useChat = () => {
       setMessageList((prevList) => [...prevList, { text: message, datetime: new Date() }])
       form.reset({ message: '' })
       setIsLoading(true)
-      const response = await getBotResponse(message.trim().toLowerCase())
+      const response = await getOpenaiMessage(message.trim().toLowerCase())
       setIsLoading(false)
-      setMessageList((prevList) => [
-        ...prevList,
-        { text: response.text, isBot: true, datetime: new Date() },
-      ])
+      setMessageList((prevList) => [...prevList, response])
     } catch (error) {
       // TODO: handle error with toast
       console.log(error)
