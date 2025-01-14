@@ -14,7 +14,7 @@ interface Props {
 
 export const MessageList = ({ listRef, messageList, isLoading }: Props) => {
   return (
-    <ScrollArea className="xs:px-4 xs:h-[calc(100svh-176px)] h-[calc(100svh-220px)] border-y border-indigo-200 bg-white px-2 sm:mx-4 sm:rounded-md sm:border sm:px-4">
+    <ScrollArea className="xs:px-4 xs:h-[calc(100svh-200px)] h-[calc(100svh-220px)] border-y border-indigo-200 bg-white px-2 sm:mx-4 sm:rounded-md sm:border sm:px-4">
       <ul ref={listRef} className="flex flex-col gap-2">
         {messageList.length ? (
           <span className="py-2 text-center text-xs font-semibold text-neutral-200">
