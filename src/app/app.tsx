@@ -1,20 +1,10 @@
-import { useForm } from 'react-hook-form'
-import { useState } from 'react'
-
 import './app.css'
 import { ChatForm } from './components/chat-form'
 import { MessageList } from './components/message-list'
+import { useChat } from './hooks/use-chat'
 
 export const App = () => {
-  const [messageList, setMessageList] = useState<string[]>([])
-
-  const form = useForm({
-    defaultValues: { message: '' },
-  })
-
-  const onSubmit = ({ message }: { message: string }) => {
-    setMessageList((prevList) => [...prevList, message])
-  }
+  const { form, onSubmit, messageList } = useChat()
 
   return (
     <div className="flex flex-col bg-indigo-200 p-4">
