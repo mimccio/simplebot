@@ -9,7 +9,7 @@ export const App = () => {
   const { listRef, form, onSubmit, messageList, isLoading, clearChat } = useChat()
 
   return (
-    <div className="bg-indigo-50">
+    <div className="bg-gradient-to-br from-indigo-50 from-20% via-indigo-100 via-40% to-indigo-50 to-60%">
       <TooltipProvider>
         <div className="mx-auto flex min-h-svh max-w-4xl flex-col">
           <Header clearChat={clearChat} />
