@@ -1,17 +1,19 @@
-import './app.css'
+import { useChat } from './hooks/use-chat'
 import { ChatForm } from './components/chat-form'
 import { Header } from './components/header'
 import { MessageList } from './components/message-list'
-import { useChat } from './hooks/use-chat'
+import './app.css'
 
 export const App = () => {
-  const { form, onSubmit, messageList } = useChat()
+  const { form, onSubmit, messageList, isLoading } = useChat()
 
   return (
-    <div className="flex min-h-svh flex-col px-4">
-      <Header />
-      <MessageList messageList={messageList} />
-      <ChatForm form={form} onSubmit={onSubmit} />
+    <div className="bg-indigo-50">
+      <div className="mx-auto flex min-h-svh max-w-4xl flex-col">
+        <Header />
+        <MessageList messageList={messageList} isLoading={isLoading} />
+        <ChatForm form={form} onSubmit={onSubmit} isLoading={isLoading} />
+      </div>
     </div>
   )
 }

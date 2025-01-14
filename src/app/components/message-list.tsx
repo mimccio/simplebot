@@ -1,13 +1,36 @@
+import SyncLoader from 'react-spinners/SyncLoader'
+
+import { ScrollArea } from '@/common/ui/scroll-area'
+import { Message } from '../types/message'
+
 interface Props {
-  messageList: string[]
+  messageList: Message[]
+  isLoading: boolean
 }
 
-export const MessageList = ({ messageList }: Props) => {
+export const MessageList = ({ messageList, isLoading }: Props) => {
   return (
-    <ul className="grow">
-      {messageList.map((msg, i) => (
-        <li key={i}>{msg}</li>
-      ))}
-    </ul>
+    <ScrollArea className="xs:px-4 h-[calc(100svh-190px)] border-y border-indigo-200 bg-white px-2 sm:mx-4 sm:rounded-md sm:border sm:px-4">
+      <ul className="flex flex-col gap-2">
+        {messageList.map((msg, i) => (
+          <li className={`flex ${msg.isBot ? '' : 'justify-end'}`} key={i}>
+            <span
+              className={`flex flex-col gap-1 rounded-lg p-2 ${msg.isBot ? 'bg-neutral-50 text-neutral-700' : 'bg-indigo-100 text-indigo-700'}`}
+            >
+              {msg.text}
+            </span>
+          </li>
+        ))}
+
+        <SyncLoader
+          color="rgb(165 180 252)"
+          loading={isLoading}
+          size={8}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          className="mb-8"
+        />
+      </ul>
+    </ScrollArea>
   )
 }

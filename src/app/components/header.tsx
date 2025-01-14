@@ -1,7 +1,7 @@
 export const Header = () => {
   return (
-    <header className="py-3">
-      <h1>SimpleBot</h1>
+    <header className="px-4 py-3">
+      <h1 className="font-semibold text-primary">SimpleBot</h1>
     </header>
   )
 }
