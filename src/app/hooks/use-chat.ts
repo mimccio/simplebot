@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import autoAnimate from '@formkit/auto-animate'
 
 import { Message } from '../types/message'
@@ -28,11 +30,23 @@ const getBotResponse = async (msg: string) => {
   return botResponses[Math.floor(Math.random() * botResponses.length)]
 }
 
+const formSchema = z.object({
+  message: z
+    .string()
+    .min(2, { message: 'Le message doit faire au moins 2 caractères' })
+    .max(500, { message: 'Le message doit faire 500 caractères au maximum' }),
+})
+
 export const useChat = () => {
   const listRef = useRef<HTMLUListElement>(null)
   const [messageList, setMessageList] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const form = useForm({ defaultValues: { message: '' } })
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      message: '',
+    },
+  })
 
   useEffect(() => {
     if (listRef.current) {

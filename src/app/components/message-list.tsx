@@ -12,7 +12,7 @@ interface Props {
 
 export const MessageList = ({ listRef, messageList, isLoading }: Props) => {
   return (
-    <ScrollArea className="xs:px-4 h-[calc(100svh-190px)] border-y border-indigo-200 bg-white px-2 sm:mx-4 sm:rounded-md sm:border sm:px-4">
+    <ScrollArea className="xs:px-4 xs:h-[calc(100svh-176px)] h-[calc(100svh-220px)] border-y border-indigo-200 bg-white px-2 sm:mx-4 sm:rounded-md sm:border sm:px-4">
       <ul ref={listRef} className="flex flex-col gap-2">
         {messageList.map((msg, i) => (
           <li className={`flex ${msg.isBot ? '' : 'justify-end'}`} key={i}>
